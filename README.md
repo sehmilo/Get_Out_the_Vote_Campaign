@@ -57,6 +57,9 @@ Start Time: Tuesday, September 19, 2023 6:05:54 AM
 Random Seed: 496184
 ![Model Characteristics](/Images/Model_characteristics_training.png)
 ![Model out of Bag Erro and Top Variable Importance](/Images/Model_out_of_bag__Top_Variable.png)
+By default, forest-based classification and regression reserves 10 percent of the data for validation. The model is trained without this random subset, and the tool returns an R-squared value that measures how well the model performed on the unseen data.
+
+When a model is evaluated based on the training dataset rather than a validation dataset, it is common for estimates of performance to be overstated due to a concept called overfitting. Therefore, the validation R-squared value is a better indicator of model performance than the training R-squared value. The model returned a validation R-squared value of 0.456, indicating that the model predicted the voter turnout value in the validation dataset with an accuracy of about 45 percent.
 ![Training Data: Regression Diagnostics and Validation Data: Regression Diagnostics](/Images/TrainingValidation_RegressionDiagnostics.png)
 ![Expplanatory Variable Range](/Images/Explanatory_Variable_Range_Diagnostics.png)
 ![alt text](image.jpg)
