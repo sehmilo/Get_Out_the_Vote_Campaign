@@ -55,8 +55,8 @@ Messages
 
 Start Time: Tuesday, September 19, 2023 6:05:54 AM
 Random Seed: 496184
-![Model Characteristics](Model_characteristics_training.png)
-![Model out of Bag Erro and Top Variable Importance](Model_out_of_bag__Top_Variable.png)
-![Training Data: Regression Diagnostics and Validation Data: Regression Diagnostics](TrainingValidation_RegressionDiagnostics.png)
-![Expplanatory Variable Range](Explanatory_Variable_Range_Diagnostics.png)
+![Model Characteristics](/Images/Model_characteristics_training.png)
+![Model out of Bag Erro and Top Variable Importance](/Images/Model_out_of_bag__Top_Variable.png)
+![Training Data: Regression Diagnostics and Validation Data: Regression Diagnostics](/Images/TrainingValidation_RegressionDiagnostics.png)
+![Expplanatory Variable Range](/Images/Explanatory_Variable_Range_Diagnostics.png)
 ![alt text](image.jpg)
