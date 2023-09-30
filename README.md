@@ -42,6 +42,8 @@ The 2022 Per Capita Income and 2022 Pop Age 25+: High School/No Diploma: Percent
 
 ![Summary of Variable Importance chart](/Images/Summary Of Variable Importance chart.jpg)
 
+![Expplanatory Variable Range](/Images/Summary of Variable Importance chart.jpg)
+
 As previously mentioned, each time that you run the Forest-based Classification and Regression tool, you may get slightly different results due to the randomness introduced in the algorithm. To understand and account for this variability, you will use a parameter that allows the tool to create multiple models in one run. This output will allow you to explore the distribution of model performance.
 
 ## Examine Model Stability
@@ -93,6 +95,7 @@ In this step, variables are added to the model to see if they enhance model's pe
 Many variables are now added as explanatory training variables. Voter turnout for 2020 is the variable that you are trying to understand, and the same variable should not be used as both the independent and dependent variables for this analysis. The Forest-based Classification and Regression tool can also use categorical variables, which are variables of a string field type instead of a numeric field type. The State_Abbr and the 2022 Dominant LifeMode Grp Code variables are both marked as categorical variables in the Explanatory Training Variables list.
 
 Reviewing the R-squared value in the validation data regression diagnostics.
+
 ![R-squared validation data regression](/Images/validation R2_manyVAR.jpg)
 
 
