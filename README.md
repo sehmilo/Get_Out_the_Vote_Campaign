@@ -18,41 +18,6 @@ The data and exercise are part of ESRI's MOOC Exercise on Predictions, Spatial D
 
 ## Create Prediction Model 
 
-Forest-based Classification and Regression
-=====================
-Parameters
-
-Prediction Type     TRAIN
-Input Training Features     CountyElections2020
-Variable to Predict     voter_turnout_2020
-Treat Variable as Categorical     
-Explanatory Training Variables     gender_MEDAGE_CY false;householdincome_PCI_CY false;educationalattainment_SOMEHS_CY_P false
-Explanatory Training Distance Features     
-Explanatory Training Rasters     
-Input Prediction Features     
-Output Predicted Features     
-Output Prediction Surface     
-Match Explanatory Variables     
-Match Distance Features     
-Match Explanatory Rasters     
-Output Trained Features     C:\EsriTraining\Prediction\Prediction_Data.gdb\Out_Trained_Features
-Output Variable Importance Table     C:\EsriTraining\Prediction\Prediction_Data.gdb\Out_Variable_Importance_Table
-Convert Polygons to Raster Resolution for Training     TRUE
-Number of Trees     100
-Minimum Leaf Size     
-Maximum Tree Depth     
-Data Available per Tree (%)     100
-Number of Randomly Sampled Variables     
-Training Data Excluded for Validation (%)     10
-Output Classification Performance Table (Confusion Matrix)     
-Output  Validation Table     
-Compensate for Sparse Categories     FALSE
-Number of Runs for Validation     1
-Calculate Uncertainty     FALSE
-Output Uncertainty Raster Layers     
-Output Trained Model File     
-=====================
-Messages
 
 Start Time: Tuesday, September 19, 2023 6:05:54 AM
 Random Seed: 496184
@@ -70,7 +35,6 @@ When a model is evaluated based on the training dataset rather than a validation
 
 ![Expplanatory Variable Range](/Images/Explanatory_Variable_Range_Diagnostics.png)
 
-![alt text](image.jpg)
 
 Here we review how important each explanatory variable was in generating a prediction. The Out_Trained_Features layer displays the predicted voter turnout for each county in the contiguous United States. A variable importance table and associated bar chart are added to the Contents pane and can be used to explore which variables were most important in this prediction.
 
@@ -84,41 +48,6 @@ As previously mentioned, each time that you run the Forest-based Classification 
 
 In this step, you will review the prediction intervals in this model to see whether the model's performance is relatively stable across all values.
 
-Forest-based Classification and Regression
-=====================
-Parameters
-
-Prediction Type     TRAIN
-Input Training Features     CountyElections2020
-Variable to Predict     voter_turnout_2020
-Treat Variable as Categorical
-Explanatory Training Variables     gender_MEDAGE_CY false;householdincome_PCI_CY false;educationalattainment_SOMEHS_CY_P false
-Explanatory Training Distance Features
-Explanatory Training Rasters
-Input Prediction Features
-Output Predicted Features
-Output Prediction Surface
-Match Explanatory Variables
-Match Distance Features
-Match Explanatory Rasters
-Output Trained Features     C:\EsriTraining\Prediction\Prediction_Data.gdb\Out_Trained_Features
-Output Variable Importance Table     C:\EsriTraining\Prediction\Prediction_Data.gdb\Out_Variable_Importance_Table
-Convert Polygons to Raster Resolution for Training     TRUE
-Number of Trees     100
-Minimum Leaf Size
-Maximum Tree Depth
-Data Available per Tree (%)     100
-Number of Randomly Sampled Variables
-Training Data Excluded for Validation (%)     10
-Output Classification Performance Table (Confusion Matrix)
-Output  Validation Table     C:\EsriTraining\Prediction\Prediction_Data.gdb\Out_Validation_Table
-Compensate for Sparse Categories     FALSE
-Number of Runs for Validation     10
-Calculate Uncertainty     FALSE
-Output Uncertainty Raster Layers
-Output Trained Model File
-=====================
-Messages
 
 Start Time: Friday, September 22, 2023 5:43:15 AM
 Random Seed: 569216
@@ -128,20 +57,20 @@ The tool trained 10 models with random subsets of validation data. In the exampl
 
 In the Contents pane, in the Standalone Tables section, open the Validation R2 chart.
 
-![Validation R2 chart](validation R2.jpg)
+![Validation R2 chart](/Images/validation R2.jpg)
 
 The histogram shows the variability in model performance by visualizing the distribution of R-squared values returned over the 10 runs. The mean R-squared value for the 10 runs of this model is 0.487
 
 In the Contents pane, open the Distribution Of Variable Importance chart.
 
-![Distribution of Variable Importance chart](Distribution of variable importance.jpg)
+![Distribution of Variable Importance chart](/Images/Distribution of variable importance.jpg)
 
 
 Instead of a bar chart, the variable importance is visualized using a box plot to show the distribution of importance across the 10 runs of the model. In some runs of the model, Per Capita Income was more important, and in other runs, Pop Age 25+: High School/No Diploma: Percent was also important. Overall, both variables are strong candidates for the predictive model.
 
 For prediction interval
 
-![Prediction Interval](Prediction interval.jpg)
+![Prediction Interval](/Images/Prediction interval.jpg)
 
 The Prediction Interval chart displays the level of uncertainty for any given prediction value. By considering the range of prediction values returned by the individual trees in the forest, prediction intervals are generated, indicating the range in which the true value is expected to fall. You can be 90 percent confident that new prediction values generated using the same explanatory variables would fall in this range. This chart can help you identify whether the model is better at predicting some values than others. For example, if the confidence intervals were much larger for low voter turnout values, then you would know that the model is not as stable for predicting low voter turnout as it is for predicting high voter turnout. The prediction intervals in this model are fairly consistent, indicating that the model performance is relatively stable across all values.
 
@@ -161,3 +90,24 @@ At this point, the attributes in the dataset were used as the explanatory variab
 The Forest-based Classification and Regression tool uses a random subset of the available explanatory variables in each decision tree. Commonalities in the predictions and variables used among all the trees in the forest are quantified in the variable importance diagnostic. In general, that means that you can test adding variables to the model without diminishing the model's predictive power. Variables that are useful result in higher variable importance scores, and variables that are not useful result in lower variable importance scores.
 
 In this step, variables are added to the model to see if they enhance model's performance for predicting voter turnout.
+Many variables are now added as explanatory training variables. Voter turnout for 2020 is the variable that you are trying to understand, and the same variable should not be used as both the independent and dependent variables for this analysis. The Forest-based Classification and Regression tool can also use categorical variables, which are variables of a string field type instead of a numeric field type. The State_Abbr and the 2022 Dominant LifeMode Grp Code variables are both marked as categorical variables in the Explanatory Training Variables list.
+
+Reviewing the R-squared value in the validation data regression diagnostics.
+![R-squared validation data regression](/Images/validation R2_manyVAR.jpg)
+
+
+In this example, the model's R-squared value increased to 0.879, which means that it is now predicting with almost 88 percent accuracy based on the validation data. 
+
+Slightly different results may arise due to the randomness introduced in the algorithm to prevent the model from overfitting to the training data. 
+The more categories that a variable contains, the more likely it is that the variable will dominate the model and lead to less effective prediction results. When selecting variables for your model, consider this effect on results.
+
+
+Reviewing the Distribution Of Variable Importance chart.
+
+![Distribution of Variable Importance](/Images/Summary Of Variable Importance chart_manyVAR.jpg)
+
+
+The voter turnout variables have the highest variable importance in the model, but several new variables have contributed to the model and raised its performance. There are also several variables that may not be helping the model, represented by their low variable importance.
+
+With the Forest-based Classification and Regression tool, you can also calculate new variables based on distances to meaningful locations. In the next step, I will calculate distance variables and assess their importance to the model.
+
